@@ -59,8 +59,8 @@ class CustomBottomNavBar extends StatelessWidget {
                     _buildTabItem(0),
                     // Tab 1: 驻站 (around 100px from left)
                     _buildTabItem(1),
-                    // Empty space for center button (50px)
-                    const SizedBox(width: 50),
+                    // Empty space for center button with label (Tab 2: 查件)
+                    _buildCenterButtonLabel(),
                     // Tab 3: 寄件 (around 250px from left)
                     _buildTabItem(3),
                     // Tab 4: 我的 (around 325px from left)
@@ -69,15 +69,15 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
               ),
             ),
-            // Center raised button (26x26 at Y=17)
+            // Center raised circle only (at Y=12)
             Positioned(
-              top: 17,
+              top: 12,
               left: 0,
               right: 0,
               child: Center(
                 child: GestureDetector(
                   onTap: () => onTap(2),
-                  child: _buildCenterButton(),
+                  child: _buildCenterCircle(),
                 ),
               ),
             ),
@@ -129,41 +129,65 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 
-  /// Build center button (26x26 white circle with blue background when selected)
-  Widget _buildCenterButton() {
+  /// Build center button label (for the bottom nav row)
+  Widget _buildCenterButtonLabel() {
+    final isSelected = selectedIndex == 2;
+    final activeColor = const Color(0xFF3F7BF2);
+    final inactiveColor = const Color(0xFF333333);
+    final itemColor = isSelected ? activeColor : inactiveColor;
+
+    return GestureDetector(
+      onTap: () => onTap(2),
+      child: SizedBox(
+        width: 60,
+        height: 45,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Label (10pt)
+            Text(
+              labels[2],
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'PingFang SC',
+                color: itemColor,
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Build center raised circle only
+  Widget _buildCenterCircle() {
     final isSelected = selectedIndex == 2;
     final backgroundColor =
         isSelected ? const Color(0xFF3F7BF2) : const Color(0xFF999999);
 
     return Container(
-      padding: const EdgeInsets.all(10),
+      width: 60,
+      height: 60,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 129, 77, 77),
-        borderRadius: BorderRadius.circular(100),
+        shape: BoxShape.circle,
+        color: backgroundColor,
+        boxShadow: [
+          BoxShadow(
+            color: backgroundColor.withOpacity(0.3),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+          ),
+        ],
       ),
-      child: Container(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: backgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: backgroundColor.withOpacity(0.3),
-              offset: const Offset(0, 2),
-              blurRadius: 8,
-            ),
-          ],
-        ),
-        child: Center(
-          child: SizedBox(
-            width: 28,
-            height: 28,
-            child: SvgPicture.asset(
-              icons[2],
-              colorFilter:
-                  const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-            ),
+      child: Center(
+        child: SizedBox(
+          width: 28,
+          height: 28,
+          child: SvgPicture.asset(
+            icons[2],
+            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
           ),
         ),
       ),
