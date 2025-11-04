@@ -5,15 +5,22 @@ class MainController extends GetxController {
   final RxInt selectedTabIndex = 0.obs;
 
   // Tab titles
-  final List<String> tabTitles = ['取件', '驻站', '寄件', '查件', '我的'];
+  final List<String> tabTitles = ['首页', '运单', '消息', '我的'];
 
   // Tab icons paths
   final List<String> tabIcons = [
-    'assets/icons/nav/pickup.svg',
-    'assets/icons/nav/station.svg',
-    'assets/icons/nav/send.svg',
-    'assets/icons/nav/search.svg',
-    'assets/icons/nav/me.svg',
+    'assets/images/home.png',
+    'assets/images/shipment.png',
+    'assets/images/message.png',
+    'assets/images/profile.png',
+  ];
+
+  // Tab icons paths (selected)
+  final List<String> tabIconsSelected = [
+    'assets/images/home_selected.png',
+    'assets/images/shipment_selected.png',
+    'assets/images/message_selected.png',
+    'assets/images/profile_selected.png',
   ];
 
   MainController();
