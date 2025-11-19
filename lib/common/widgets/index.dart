@@ -1,3 +1,3 @@
 library widgets;
 
-// export './xxxx.dart';
+export './bg_text_widget.dart';

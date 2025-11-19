@@ -8,4 +8,6 @@ class RouteNames {
   static const cargoDetail = '/cargo_detail';
   static const driverVerify = '/driver_verify';
   static const idCardVerify = '/id_card_verify';
+  static const profile = '/profile';
+  static const grabb = '/grabb';
 }

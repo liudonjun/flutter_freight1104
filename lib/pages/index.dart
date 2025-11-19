@@ -9,3 +9,5 @@ export 'roadside_assistance/index.dart';
 export 'garage/index.dart';
 export 'driver_verify/index.dart';
 export 'id_card_verify/index.dart';
+export 'profile/index.dart';
+export 'grabb/index.dart';

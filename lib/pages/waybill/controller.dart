@@ -7,7 +7,7 @@ class WaybillController extends GetxController {
   var selectedTabIndex = 0.obs;
 
   // Tab标签
-  final List<String> tabs = ['正在进行', '已完成', '已取消'];
+  final List<String> tabs = ['待接单', '进行中', '已完成'];
 
   // 切换Tab
   void switchTab(int index) {

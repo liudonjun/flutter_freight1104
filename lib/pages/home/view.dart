@@ -148,7 +148,7 @@ class HomePage extends GetView<HomeController> {
             Get.toNamed(RouteNames.roadsideAssistance);
             break;
           case '抢单大厅':
-            // TODO: 跳转到抢单大厅
+            Get.toNamed(RouteNames.grabb);
             break;
           case '违章查询':
             // TODO: 跳转到违章查询
@@ -544,8 +544,8 @@ class HomePage extends GetView<HomeController> {
                 Row(
                   children: [
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 3),
                       decoration: BoxDecoration(
                         border: Border.all(
                             color: const Color(0xFF007DF9), width: 0.6),
@@ -561,8 +561,8 @@ class HomePage extends GetView<HomeController> {
                     ),
                     const SizedBox(width: 6),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 3),
                       decoration: BoxDecoration(
                         border: Border.all(
                             color: const Color(0xFFFF7124), width: 0.6),
@@ -581,148 +581,148 @@ class HomePage extends GetView<HomeController> {
                 const SizedBox(height: 12),
                 // 图片和详情
                 Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 货车图片占位
-                  Stack(
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF5F5F5),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(
-                          Icons.local_shipping,
-                          size: 40,
-                          color: Color(0xFFCCCCCC),
-                        ),
-                      ),
-                      if (badge.isNotEmpty)
-                        Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.6),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                bottomRight: Radius.circular(6),
-                              ),
-                            ),
-                            child: Text(
-                              badge,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 货车图片占位
+                    Stack(
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF5F5F5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.local_shipping,
+                            size: 40,
+                            color: Color(0xFFCCCCCC),
                           ),
                         ),
-                    ],
-                  ),
-                  const SizedBox(width: 15),
-                  // 详情信息
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.access_time,
-                              size: 15,
-                              color: Color(0xFF989898),
-                            ),
-                            const SizedBox(width: 3),
-                            Text(
-                              loadTime,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF989898),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 11),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.inventory_2_outlined,
-                              size: 15,
-                              color: Color(0xFF989898),
-                            ),
-                            const SizedBox(width: 3),
-                            Text(
-                              cargoInfo,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF989898),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 11),
-                        // 价格和按钮
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Text(
-                              '¥',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFE8573D),
-                              ),
-                            ),
-                            Text(
-                              price,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFFE8573D),
-                              ),
-                            ),
-                            const Text(
-                              '元/趟',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF989898),
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              width: 68,
-                              height: 36,
+                        if (badge.isNotEmpty)
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6, vertical: 4),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF007DF9),
-                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.black.withOpacity(0.6),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(6),
+                                ),
                               ),
-                              child: const Center(
-                                child: Text(
-                                  '接单',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                  ),
+                              child: Text(
+                                badge,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 15),
+                    // 详情信息
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.access_time,
+                                size: 15,
+                                color: Color(0xFF989898),
+                              ),
+                              const SizedBox(width: 3),
+                              Text(
+                                loadTime,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF989898),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 11),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.inventory_2_outlined,
+                                size: 15,
+                                color: Color(0xFF989898),
+                              ),
+                              const SizedBox(width: 3),
+                              Text(
+                                cargoInfo,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF989898),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 11),
+                          // 价格和按钮
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              const Text(
+                                '¥',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFFE8573D),
+                                ),
+                              ),
+                              Text(
+                                price,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFFE8573D),
+                                ),
+                              ),
+                              const Text(
+                                '元/趟',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF989898),
+                                ),
+                              ),
+                              const Spacer(),
+                              Container(
+                                width: 68,
+                                height: 36,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF007DF9),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    '接单',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        // Badge在右上角
-      ],
+          // Badge在右上角
+        ],
       ),
     );
   }

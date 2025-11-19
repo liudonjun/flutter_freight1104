@@ -19,5 +19,7 @@ class RoutePages {
         name: RouteNames.driverVerify, page: () => const DriverVerifyPage()),
     GetPage(
         name: RouteNames.idCardVerify, page: () => const IdCardVerifyPage()),
+    GetPage(name: RouteNames.profile, page: () => const ProfilePage()),
+    GetPage(name: RouteNames.grabb, page: () => const GrabbPage()),
   ];
 }

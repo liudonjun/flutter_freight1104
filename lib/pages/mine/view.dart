@@ -67,25 +67,30 @@ class MinePage extends GetView<MineController> {
               child: Row(
                 children: [
                   // 头像
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 1),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF0056AA).withOpacity(0.04),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      size: 35,
-                      color: Color(0xFF999999),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteNames.profile);
+                    },
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 1),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF0056AA).withOpacity(0.04),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Color(0xFF999999),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 12),

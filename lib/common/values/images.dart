@@ -1,6 +1,7 @@
 /// 图片 assets
 class AssetsImages {
   static const bgHomePng = 'assets/images/bg_home.png';
+  static const bgKuanPng = 'assets/images/bg_kuan.png';
   static const chePng = 'assets/images/che.png';
   static const homePng = 'assets/images/home.png';
   static const homeBannerPng = 'assets/images/home_banner.png';

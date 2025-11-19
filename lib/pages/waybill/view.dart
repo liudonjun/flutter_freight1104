@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_freight/common/index.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'index.dart';
 
@@ -24,9 +26,9 @@ class WaybillPage extends GetView<WaybillController> {
                     border: Border(
                       bottom: BorderSide(
                         color: isSelected
-                            ? const Color(0xFF007DF9)
+                            ? const Color(0xFF348BFF)
                             : Colors.transparent,
-                        width: 2,
+                        width: 3,
                       ),
                     ),
                   ),
@@ -34,12 +36,12 @@ class WaybillPage extends GetView<WaybillController> {
                     child: Text(
                       controller.tabs[index],
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 14,
                         fontWeight:
-                            isSelected ? FontWeight.w500 : FontWeight.normal,
+                            isSelected ? FontWeight.w500 : FontWeight.w400,
                         color: isSelected
-                            ? const Color(0xFF333333)
-                            : const Color(0xFF989898),
+                            ? const Color(0xFF181818)
+                            : const Color(0xFF9A9A9A),
                       ),
                     ),
                   ),
@@ -69,18 +71,6 @@ class WaybillPage extends GetView<WaybillController> {
       ),
       child: const Stack(
         children: [],
-      ),
-    );
-  }
-
-  // 城市标签
-  Widget _buildCityLabel(String city) {
-    return Text(
-      city,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: Color(0xFF333333),
       ),
     );
   }
@@ -571,6 +561,294 @@ class WaybillPage extends GetView<WaybillController> {
     );
   }
 
+  // 已完成运单卡片
+  Widget _buildCompletedWaybillCard({
+    required String from,
+    required String to,
+    required List<String> tags,
+    required String orderNumber,
+    required String datetime,
+    required String destination,
+    bool isMain = false,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF005FDD).withOpacity(0.1),
+            blurRadius: 12,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 标题行
+          Row(
+            children: [
+              Text(
+                from,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF1A1A1A),
+                ),
+              ),
+              BgTextWidget(
+                text: '货',
+                textStyle: TextStyle(
+                  fontSize: 10,
+                  color: Color(0xFF016EFD), //016EFD
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                to,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF1A1A1A),
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEA981B),
+                  borderRadius: BorderRadius.circular(9),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      isMain ? '主' : '副',
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xffffffff),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    SvgPicture.asset(
+                      'assets/svgs/icon_switch.svg',
+                      width: 16,
+                      height: 16,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // 标签和时间
+          Row(
+            children: [
+              Expanded(
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: tags.map((tag) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEA981B).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: Text(
+                        tag,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFFEA981B),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              Text(
+                datetime,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF333333),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // 路线信息区域
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF4F9FF),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 14,
+                      height: 14,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF348BFF),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '单',
+                          style: TextStyle(
+                            fontSize: 8,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      orderNumber,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF333333),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Container(
+                      width: 14,
+                      height: 14,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFEA981B),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '装',
+                          style: TextStyle(
+                            fontSize: 8,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        destination,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF348BFF),
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      '已还柜',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF11CA86),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    SvgPicture.asset(
+                      'assets/svgs/icon_location.svg',
+                      width: 13,
+                      height: 13,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          // 查看费用按钮
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                // TODO: 查看费用
+                Get.snackbar('提示', '查看费用');
+              },
+              child: Container(
+                width: double.infinity,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: const Color(0xFF348BFF),
+                    width: 1,
+                  ),
+                ),
+                child: const Center(
+                  child: Text(
+                    '查看费用',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF348BFF),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 已完成运单列表
+  Widget _buildCompletedWaybillList() {
+    return ListView(
+      padding: const EdgeInsets.only(top: 12),
+      children: [
+        _buildCompletedWaybillCard(
+          from: '盐田',
+          to: '龙岗',
+          tags: ['20GP', '5吨'],
+          orderNumber: 'KJ1854241586',
+          datetime: '11-20 15:25',
+          destination: '合肥蚌埠芜湖马鞍山安庆黄山巢',
+          isMain: false,
+        ),
+        _buildCompletedWaybillCard(
+          from: '盐田',
+          to: '龙岗',
+          tags: ['20GP', '5吨', '开拖单'],
+          orderNumber: 'KJ1854241586',
+          datetime: '11-20 15:25',
+          destination: '合肥蚌埠芜湖马鞍山安庆黄山巢',
+          isMain: true,
+        ),
+        _buildCompletedWaybillCard(
+          from: '盐田',
+          to: '龙岗',
+          tags: ['20GP', '5吨', '开拖单'],
+          orderNumber: 'KJ1854241586',
+          datetime: '11-20 15:25',
+          destination: '合肥蚌埠芜湖马鞍山安庆黄山巢',
+          isMain: false,
+        ),
+      ],
+    );
+  }
+
   // 主视图
   Widget _buildView() {
     return Container(
@@ -579,29 +857,39 @@ class WaybillPage extends GetView<WaybillController> {
         children: [
           _buildTabBar(),
           Expanded(
-            child: SingleChildScrollView(
-              child: Stack(
-                children: [
-                  Column(
+            child: Obx(() {
+              final selectedIndex = controller.selectedTabIndex.value;
+              // 待接单和进行中显示地图视图
+              if (selectedIndex == 0 || selectedIndex == 1) {
+                return SingleChildScrollView(
+                  child: Stack(
                     children: [
-                      _buildMapSection(),
-                      const SizedBox(height: 170), // 为重叠的卡片留出空间
-                      _buildRouteCard(),
-                      _buildOwnerCard(),
-                      _buildOrderDetailCard(),
-                      const SizedBox(height: 20),
+                      Column(
+                        children: [
+                          _buildMapSection(),
+                          const SizedBox(height: 170), // 为重叠的卡片留出空间
+                          _buildRouteCard(),
+                          _buildOwnerCard(),
+                          _buildOrderDetailCard(),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                      // 货源信息卡片向上覆盖地图
+                      Positioned(
+                        top: 200, // 调整这个值来控制重叠的程度
+                        left: 0,
+                        right: 0,
+                        child: _buildCargoInfoCard(),
+                      ),
                     ],
                   ),
-                  // 货源信息卡片向上覆盖地图
-                  Positioned(
-                    top: 200, // 调整这个值来控制重叠的程度
-                    left: 0,
-                    right: 0,
-                    child: _buildCargoInfoCard(),
-                  ),
-                ],
-              ),
-            ),
+                );
+              }
+              // 已完成显示列表
+              else {
+                return _buildCompletedWaybillList();
+              }
+            }),
           ),
         ],
       ),
@@ -617,10 +905,19 @@ class WaybillPage extends GetView<WaybillController> {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text('运单'),
+            title: const Text(
+              '我的运单',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF1A1A1A),
+              ),
+            ),
             backgroundColor: Colors.white,
-            elevation: 0,
+            elevation: 0.5,
+            shadowColor: Colors.black.withOpacity(0.05),
             centerTitle: true,
+            iconTheme: const IconThemeData(color: Color(0xFF181818)),
           ),
           body: SafeArea(
             child: _buildView(),
